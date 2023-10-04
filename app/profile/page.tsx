@@ -28,7 +28,7 @@ export default function Page() {
           </div>
         </div>
         <p className="relative w-fit first-line:font-normal text-[#000000] text-[16px] tracking-[0] leading-[16px] whitespace-nowrap">
-            Software engineer working on I'm: an app for investments in people, not companies.
+            Software engineer working on I&apos;m: an app for investments in people, not companies.
         </p>
         <div className="inline-flex items-start gap-[32px] relative flex-[0_0_auto]">
           <TwitterLogoIcon className="!relative !w-[24px] !h-[24px]" />
