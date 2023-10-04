@@ -14,7 +14,7 @@ import {
     TextInput,
 } from "@tremor/react";
 import { useState } from "react";
-import { SearchIcon } from "@heroicons/react/solid";
+import { MagnifyingGlassIcon } from "@heroicons/react/24/solid";
 import Image from "next/image";
   
 type Person = {
@@ -97,7 +97,7 @@ export default function Assets() {
         <Card>
             <Title>assets</Title>
             <TextInput
-                icon={SearchIcon}
+                icon={MagnifyingGlassIcon}
                 placeholder="search..."
                 className="mt-6"
                 onChange={(event) => setSearchQuery(event.target.value)}

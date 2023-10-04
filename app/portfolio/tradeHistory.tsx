@@ -14,7 +14,7 @@ import {
   Title,
 } from "@tremor/react";
 import { Dialog, Transition } from "@headlessui/react";
-import { ArrowsExpandIcon } from "@heroicons/react/outline";
+import { ArrowsPointingOutIcon } from "@heroicons/react/24/outline";
 import Image from "next/image";
 
 interface Trade {
@@ -185,7 +185,7 @@ export default function TradeHistory() {
         </Table>
         <div className="inset-x-0 bottom-0 flex justify-center bg-gradient-to-t from-white pt-12 pb-8 absolute rounded-b-lg">
           <Button
-            icon={ArrowsExpandIcon}
+            icon={ArrowsPointingOutIcon}
             className="bg-white shadow-md border-gray-200 text-gray-500 hover:bg-gray-50 hover:border-gray-300"
             onClick={openModal}
           >
