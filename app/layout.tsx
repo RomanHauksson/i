@@ -21,11 +21,10 @@ export default function RootLayout({
 }) {
   return (
     <html lang="en" className={spaceGrotesk.className}>
-      <body className="flex gap-16 justify-center mt-4`">
+      <body className="max-w-5xl gap-24 p-6 flex items-start m-auto">
         <Sidebar />
         {children}
       </body>
     </html>
   )
 }
-

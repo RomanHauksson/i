@@ -15,6 +15,7 @@ import {
 } from "@tremor/react";
 import { Dialog, Transition } from "@headlessui/react";
 import { ArrowsExpandIcon } from "@heroicons/react/outline";
+import Image from "next/image";
 
 interface Trade {
   id: number;
@@ -143,18 +144,20 @@ export default function TradeHistory() {
         <Table>
           <TableHead>
             <TableRow>
+              <TableHeaderCell></TableHeaderCell>
               <TableHeaderCell className="text-right">date</TableHeaderCell>
               <TableHeaderCell className="text-right">symbol</TableHeaderCell>
               <TableHeaderCell className="text-right">shares</TableHeaderCell>
               <TableHeaderCell className="text-right">trade price</TableHeaderCell>
               <TableHeaderCell className="text-right">current price</TableHeaderCell>
               <TableHeaderCell className="text-right">return</TableHeaderCell>
-              <TableHeaderCell className="text-right"></TableHeaderCell>
+              {/* <TableHeaderCell className="text-right"></TableHeaderCell> */}
             </TableRow>
           </TableHead>
           <TableBody>
             {trades.map((item) => (
               <TableRow key={item.id}>
+                <TableCell><Image className="rounded-full" src="/Roman.jpg" width={32} height={32} alt={"Avatar for Roman"}/></TableCell>
                 <TableCell className="text-right">
                   <Text>{item.date}</Text>
                 </TableCell>
@@ -170,9 +173,9 @@ export default function TradeHistory() {
                 <TableCell className="text-right">
                   <Text>{item.currentPrice}</Text>
                 </TableCell>
-                <TableCell className="text-right">
+                {/* <TableCell className="text-right">
                   <Text>{item.delta}</Text>
-                </TableCell>
+                </TableCell> */}
                 <TableCell className="text-right">
                   <Text>{item.deltaPercent}%</Text>
                 </TableCell>
@@ -222,18 +225,20 @@ export default function TradeHistory() {
                     <Table className="h-[450px]">
                       <TableHead>
                         <TableRow>
+                          <TableHeaderCell></TableHeaderCell>
                           <TableHeaderCell className="text-right">date</TableHeaderCell>
                           <TableHeaderCell className="text-right">symbol</TableHeaderCell>
                           <TableHeaderCell className="text-right">shares</TableHeaderCell>
                           <TableHeaderCell className="text-right">trade price</TableHeaderCell>
                           <TableHeaderCell className="text-right">current price</TableHeaderCell>
                           <TableHeaderCell className="text-right">return</TableHeaderCell>
-                          <TableHeaderCell className="text-right"></TableHeaderCell>
+                          {/* <TableHeaderCell className="text-right"></TableHeaderCell> */}
                         </TableRow>
                       </TableHead>
                       <TableBody>
                         {trades.map((item) => (
                           <TableRow key={item.id}>
+                            <TableCell><Image className="rounded-full" src="/Roman.jpg" width={32} height={32} alt={"Avatar for Roman"}/></TableCell>
                             <TableCell className="text-right">
                               <Text>{item.date}</Text>
                             </TableCell>
@@ -249,9 +254,9 @@ export default function TradeHistory() {
                             <TableCell className="text-right">
                               <Text>{item.currentPrice}</Text>
                             </TableCell>
-                            <TableCell className="text-right">
+                            {/* <TableCell className="text-right">
                               <Text>{item.delta}</Text>
-                            </TableCell>
+                            </TableCell> */}
                             <TableCell className="text-right">
                               <Text>{item.deltaPercent}%</Text>
                             </TableCell>

@@ -119,7 +119,7 @@ export default function Assets() {
                 <TableBody>
                 {filteredAssets.map((item) => (
                     <TableRow key={item.id}>
-                        <TableCell><Image src={item.avartarUrl} width={32} height={32} alt={"Avatar for " + item.name}/></TableCell>
+                        <TableCell><Image className="rounded-full" src={item.avartarUrl} width={32} height={32} alt={"Avatar for " + item.name}/></TableCell>
                         <TableCell>{item.name}</TableCell>
                         <TableCell>{item.ticker}</TableCell>
                         <TableCell className="text-right">{item.shares}</TableCell>

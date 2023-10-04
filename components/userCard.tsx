@@ -4,28 +4,28 @@ import {
     AvatarFallback,
     AvatarImage,
 } from "@/components/ui/avatar"
+import Image from "next/image";
 
 export default function UserCard() {
     return (
-        <a href="./profile" className="flex w-[500px] items-start gap-[16px] p-[17px] relative flex-[0_0_auto] bg-[#ffffff] rounded-[6px] border border-solid border shadow-[0px_4px_4px_#aeaeae40]">
-            <Avatar className="relative w-[40px] h-[40px]">
-                <AvatarImage src="Roman.jpg" alt="Avatar" />
-                <AvatarFallback>RH</AvatarFallback>
-            </Avatar>
-            <div className="inline-flex flex-col items-start gap-[4px] relative flex-[0_0_auto]">
-            <div className="relative w-fit mt-[-1.00px] [font-family:'Inter-SemiBold',Helvetica] font-semibold text-[#0f172a] text-[14px] tracking-[0] leading-[20px] whitespace-nowrap">
-                Roman Hauksson
+        <div
+        className={`flex items-start gap-[16px] p-[18px] w-full bg-[#ffffff] rounded-[8px] border border-solid`}
+      >
+        <Image className="rounded-full" alt="Avatar" src="/Roman.jpg" width={64} height={64}/>
+        <div className="inline-flex flex-col items-start gap-[8px] flex-[0_0_auto]">
+          <div className="text-xl leading-none">
+            Roman Hauksson
+          </div>
+          <div className="text-base">
+            Software engineer
+          </div>
+          <div className="inline-flex h-[18px] items-center gap-[4px]">
+            <SewingPinIcon className="relative w-[16px] h-[16px]" color="#64748B" />
+            <div className="w-fit font-card-description-subtle font-[number:var(--card-description-subtle-font-weight)] text-[#64748b] text-[length:var(--card-description-subtle-font-size)] tracking-[var(--card-description-subtle-letter-spacing)] leading-[var(--card-description-subtle-line-height)] whitespace-nowrap [font-style:var(--card-description-subtle-font-style)]">
+              Dallas, Texas
             </div>
-            <div className="relative w-[230px] [font-family:'Inter-Regular',Helvetica] font-normal text-[#0f172a] text-[14px] tracking-[0] leading-[20px]">
-                Software engineer
-            </div>
-            <div className="flex w-[230px] items-center gap-[4px] relative flex-[0_0_auto]">
-                <SewingPinIcon className="!relative !w-[16px] !h-[16px]" color="#64748B" />
-                <div className="relative w-[223px] mt-[-1.00px] mr-[-13.00px] [font-family:'Inter-Regular',Helvetica] font-normal text-[#64748b] text-[12px] tracking-[0] leading-[16px]">
-                Dallas, Texas
-                </div>
-            </div>
-            </div>
-        </a>
+          </div>
+        </div>
+      </div>
     );
 }

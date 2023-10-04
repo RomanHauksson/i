@@ -42,7 +42,7 @@ export function SalesCard() {
             </Flex>
             <Flex justifyContent="start" alignItems="baseline" className="truncate space-x-3">
                 <Metric>{item.metric}</Metric>
-                <Text className="truncate">from {item.metricPrev}</Text>
+                {/* <Text className="truncate">from {item.metricPrev}</Text> */}
             </Flex>
         </Card>
     );
@@ -58,7 +58,7 @@ export function ProfitCard() {
             </Flex>
             <Flex justifyContent="start" alignItems="baseline" className="truncate space-x-3">
                 <Metric>{item.metric}</Metric>
-                <Text className="truncate">from {item.metricPrev}</Text>
+                {/* <Text className="truncate">from {item.metricPrev}</Text> */}
             </Flex>
         </Card>
     );
@@ -74,7 +74,7 @@ export function CustomersCard() {
             </Flex>
             <Flex justifyContent="start" alignItems="baseline" className="truncate space-x-3">
                 <Metric>{item.metric}</Metric>
-                <Text className="truncate">from {item.metricPrev}</Text>
+                {/* <Text className="truncate">from {item.metricPrev}</Text> */}
             </Flex>
         </Card>
     );
