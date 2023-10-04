@@ -9,6 +9,9 @@ module.exports = {
         "./node_modules/@tremor/**/*.{js,ts,jsx,tsx}",
     ],
     theme: {
+      fontFamily: {
+        'sans': ['Space Grotesk', 'sans-serif'],
+      },
       transparent: "transparent",
       current: "currentColor",
       extend: {
