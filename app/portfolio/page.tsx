@@ -1,10 +1,10 @@
-import PortfolioValue from "./portfolioValue";
+import PortfolioValue from "../account/chart";
 import { Grid, Col } from "@tremor/react";
-import TradeHistory from "./tradeHistory";
-import Assets from "./assets";
-import { SalesCard, ProfitCard, CustomersCard } from "./metrics";
+import TradeHistory from "@/components/tradeHistory";
+import Assets from "../../components/assets";
+import { SalesCard, ProfitCard, CustomersCard } from "@/components/metrics";
 
-export default function Page() {
+export default function Portfolio() {
   return (
     <div className="flex flex-col gap-16">
         <div className="flex h-[96px] items-end">
