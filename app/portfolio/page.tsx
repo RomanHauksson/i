@@ -8,7 +8,7 @@ export default function Page() {
   return (
     <div className="flex flex-col gap-16">
         <div className="flex h-[96px] items-end">
-            <h1>portfolio</h1>
+            <h1 className="leading-none">portfolio</h1>
         </div>
         <Grid numItems={3} className="gap-2">
             <SalesCard />
