@@ -194,7 +194,7 @@ export default function TradeHistory() {
         </div>
       </Card>
       <Transition appear show={isOpen} as={Fragment}>
-        <Dialog as="div" className="relative z-50" onClose={closeModal}>
+        <Dialog onClose={closeModal}>
           <Transition.Child
             as={Fragment}
             enter="ease-out duration-300"

@@ -59,7 +59,7 @@ export default async function Profile({ params }: { params: { slug: string } }) 
           </div>
         </div>
         <Chart />
-        <OrderForm stockId={params.slug} userId={user.id} />
+        <OrderForm stockId={params.slug} userId={user != null ? user.id : ""} />
       </div>
     </div>
   );

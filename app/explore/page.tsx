@@ -1,33 +1,33 @@
 "use client";
 
 import React, { useState, useEffect } from "react";
-import UserCard from "@/components/userCard";
+import ProfileCard from "@/components/profile-card";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
+import { Database } from "@/types/supabase";
 
 export default function Explore() {
-  const supabase = createClientComponentClient();
+  const supabase = createClientComponentClient<Database>();
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [users, setUsers] = useState([]);
-  const [filteredUsers, setFilteredUsers] = useState([]);
+  const [profiles, setProfiles] = useState<Database['public']['Tables']['profiles']['Row'][]>([]);
+  const [filteredUsers, setFilteredUsers] = useState<Database['public']['Tables']['profiles']['Row'][]>([]);
 
   useEffect(() => {
     async function fetchUsers() {
       let { data, error } = await supabase.from('profiles').select();
       if (data) {
-        setUsers(data);
+        setProfiles(data);
       }
-      // Handle error if necessary
     }
     fetchUsers();
   }, []); // Empty dependency array means this effect runs once when the component mounts
 
   useEffect(() => {
-    const results = users.filter(user =>
-      user.full_name.toLowerCase().includes(searchQuery.toLowerCase())
+    const results = profiles.filter(user =>
+      (user.full_name != null) ? user.full_name.toLowerCase().includes(searchQuery.toLowerCase()) : false
     );
     setFilteredUsers(results);
-  }, [searchQuery, users]);
+  }, [searchQuery, profiles]);
 
   return (
     <div className="flex-col gap-16 flex-1 grow flex items-start relative">
@@ -44,7 +44,7 @@ export default function Explore() {
         />
         <div className="flex flex-col items-start gap-[24px] relative self-stretch w-full flex-[0_0_auto]">
           {filteredUsers.map(user => 
-            <UserCard key={user.id} id={user.id} name={user.full_name} description={user.description} city={user.city}/>
+            <ProfileCard key={user.id} profile={user}/>
           )}
         </div>
       </div>

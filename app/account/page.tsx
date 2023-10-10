@@ -1,11 +1,6 @@
 import React from "react";
 import { TwitterLogoIcon, LinkedInLogoIcon, Link1Icon } from '@radix-ui/react-icons'
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Chart from "./chart";
-import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
-import { cookies } from 'next/headers'
-import { Database } from "@/types/supabase";
-
 import {
     Avatar,
     AvatarFallback,
@@ -13,11 +8,6 @@ import {
 } from "@/components/ui/avatar"
 
 export default async function Account() {
-  const supabase = createServerComponentClient<Database>({ cookies })
-  const {
-    data: { session },
-  } = await supabase.auth.getSession();
-
   return (
     <div className="inline-flex flex-col items-start gap-[39px] relative">
       <div className="inline-flex flex-col items-start gap-[39px] relative flex-[0_0_auto]">
