@@ -1,15 +1,13 @@
 import React from "react";
 import { TwitterLogoIcon, LinkedInLogoIcon, Link1Icon } from '@radix-ui/react-icons'
-import { Tabs, TabsList, TabsTrigger } from "@/components/ui/tabs"
 import Chart from "./chart";
-
 import {
     Avatar,
     AvatarFallback,
     AvatarImage,
 } from "@/components/ui/avatar"
 
-export default function Page() {
+export default async function Account() {
   return (
     <div className="inline-flex flex-col items-start gap-[39px] relative">
       <div className="inline-flex flex-col items-start gap-[39px] relative flex-[0_0_auto]">
