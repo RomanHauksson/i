@@ -10,7 +10,6 @@ export default function AccountForm({ session }: { session: Session | null }) {
   const [username, setUsername] = useState<string | null>(null)
   const [website, setWebsite] = useState<string | null>(null)
   const [avatar_url, setAvatarUrl] = useState<string | null>(null)
-  // const user = session?.user;
   const user = session?.user;
 
   const getProfile = useCallback(async () => {
@@ -19,7 +18,7 @@ export default function AccountForm({ session }: { session: Session | null }) {
       if (!user) return;
       let { data, error, status } = await supabase
         .from('profiles')
-        .select(`full_name, username, website, avatar_url`)
+        .select(`full_name, website, avatar_url`)
         .eq('id', user?.id)
         .single()
 
@@ -29,7 +28,6 @@ export default function AccountForm({ session }: { session: Session | null }) {
 
       if (data) {
         setFullname(data.full_name)
-        setUsername(data.username)
         setWebsite(data.website)
         setAvatarUrl(data.avatar_url)
       }
@@ -87,15 +85,6 @@ export default function AccountForm({ session }: { session: Session | null }) {
           type="text"
           value={fullname || ''}
           onChange={(e) => setFullname(e.target.value)}
-        />
-      </div>
-      <div>
-        <label htmlFor="username">Username</label>
-        <input
-          id="username"
-          type="text"
-          value={username || ''}
-          onChange={(e) => setUsername(e.target.value)}
         />
       </div>
       <div>
