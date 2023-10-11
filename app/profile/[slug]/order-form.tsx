@@ -71,7 +71,7 @@ export default function OrderForm({ stockId, userId }: OrderFormProps) {
             value={numberOfShares} 
             onChange={(e) => setNumberOfShares(e.target.valueAsNumber)}
             placeholder="enter number of shares"
-            // min="0"
+            min="0"
           />
         </label>
       </div>

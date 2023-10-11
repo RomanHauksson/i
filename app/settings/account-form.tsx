@@ -2,12 +2,12 @@
 import { useCallback, useEffect, useState } from 'react'
 import { Database } from '@/types/supabase'
 import { Session, createClientComponentClient } from '@supabase/auth-helpers-nextjs'
+import Avatar from './avatar'
 
 export default function AccountForm({ session }: { session: Session | null }) {
   const supabase = createClientComponentClient<Database>()
   const [loading, setLoading] = useState(true)
   const [fullname, setFullname] = useState<string | null>(null)
-  const [username, setUsername] = useState<string | null>(null)
   const [website, setWebsite] = useState<string | null>(null)
   const [avatar_url, setAvatarUrl] = useState<string | null>(null)
   const user = session?.user;
@@ -43,11 +43,9 @@ export default function AccountForm({ session }: { session: Session | null }) {
   }, [user, getProfile])
 
   async function updateProfile({
-    username,
     website,
     avatar_url,
   }: {
-    username: string | null
     fullname: string | null
     website: string | null
     avatar_url: string | null
@@ -58,7 +56,6 @@ export default function AccountForm({ session }: { session: Session | null }) {
       let { error } = await supabase.from('profiles').upsert({
         id: user?.id as string,
         full_name: fullname,
-        username,
         website,
         avatar_url,
         updated_at: new Date().toISOString(),
@@ -72,8 +69,19 @@ export default function AccountForm({ session }: { session: Session | null }) {
     }
   }
 
+  if (!user) return <div>User not found.</div>
+
   return (
     <div className="form-widget">
+      <Avatar
+        uid={user.id}
+        url={avatar_url}
+        size={150}
+        onUpload={(url) => {
+          setAvatarUrl(url)
+          updateProfile({ fullname, website, avatar_url: url })
+        }}
+      />
       <div>
         <label htmlFor="email">Email</label>
         <input id="email" type="text" value={session?.user.email} disabled />
@@ -100,7 +108,7 @@ export default function AccountForm({ session }: { session: Session | null }) {
       <div>
         <button
           className="button primary block"
-          onClick={() => updateProfile({ fullname, username, website, avatar_url })}
+          onClick={() => updateProfile({ fullname, website, avatar_url })}
           disabled={loading}
         >
           {loading ? 'Loading ...' : 'Update'}

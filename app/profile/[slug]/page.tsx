@@ -3,23 +3,17 @@ import { TwitterLogoIcon, LinkedInLogoIcon, Link1Icon } from '@radix-ui/react-ic
 import Chart from "./chart";
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
-import OrderForm from "./order-form";
-import {
-    Avatar,
-    AvatarFallback,
-    AvatarImage,
-} from "@/components/ui/avatar"
+import OrderForm from "./order-form-new";
+import UserAvatar from "@/components/user-avatar";
 import { Database } from "@/types/supabase";
 
 export default async function Profile({ params }: { params: { slug: string } }) {
   const supabase = createServerComponentClient<Database>({ cookies });
   const {
-    data: { user },
-  } = await supabase.auth.getUser();
-
+    data: { session },
+  } = await supabase.auth.getSession();
 
   let { data, error } = await supabase.from('profiles').select().eq('id', params.slug).single();
-  
   if (!data) {
     return <div>User not found.</div>;
   }
@@ -27,10 +21,7 @@ export default async function Profile({ params }: { params: { slug: string } }) 
     <div className="inline-flex flex-col items-start gap-[39px] relative">
       <div className="inline-flex flex-col items-start gap-[39px] relative flex-[0_0_auto]">
         <div className="items-center gap-[27px] inline-flex relative flex-[0_0_auto]">
-            <Avatar className="relative w-[80px] h-[80px]">
-                <AvatarImage src="Roman.jpg" alt="Avatar" />
-                <AvatarFallback>RH</AvatarFallback>
-            </Avatar>
+            <UserAvatar profile={data} />
           <div className="flex-col items-start justify-center gap-[3px] inline-flex relative flex-[0_0_auto]">
             <h1>
               {data.full_name}
@@ -59,7 +50,7 @@ export default async function Profile({ params }: { params: { slug: string } }) 
           </div>
         </div>
         <Chart />
-        <OrderForm stockId={params.slug} userId={user != null ? user.id : ""} />
+        <OrderForm stockId={params.slug} session={session} />
       </div>
     </div>
   );
