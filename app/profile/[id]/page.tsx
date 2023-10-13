@@ -3,17 +3,17 @@ import { TwitterLogoIcon, LinkedInLogoIcon, Link1Icon } from '@radix-ui/react-ic
 import Chart from "./chart";
 import { createServerComponentClient } from '@supabase/auth-helpers-nextjs'
 import { cookies } from 'next/headers'
-import OrderForm from "./order-form-new";
+import OrderForm from "./order-form";
 import UserAvatar from "@/components/user-avatar";
 import { Database } from "@/types/supabase";
 
-export default async function Profile({ params }: { params: { slug: string } }) {
+export default async function Profile({ params }: { params: { id: string } }) {
   const supabase = createServerComponentClient<Database>({ cookies });
   const {
     data: { session },
   } = await supabase.auth.getSession();
 
-  let { data, error } = await supabase.from('profiles').select().eq('id', params.slug).single();
+  let { data, error } = await supabase.from('profiles').select().eq('id', params.id).single();
   if (!data) {
     return <div>User not found.</div>;
   }
@@ -50,7 +50,7 @@ export default async function Profile({ params }: { params: { slug: string } }) 
           </div>
         </div>
         <Chart />
-        <OrderForm stockId={params.slug} session={session} />
+        <OrderForm stockId={params.id}/>
       </div>
     </div>
   );

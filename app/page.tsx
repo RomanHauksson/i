@@ -4,12 +4,6 @@ import Portfolio from './portfolio/page';
 import AuthForm from './auth-form';
 
 export default function Index() {
-  // const supabase = createServerComponentClient({ cookies })
-
-  // const {
-  //   data: { user },
-  // } = await supabase.auth.getUser()
-
   return (
     <div className="row">
       <div className="col-6">

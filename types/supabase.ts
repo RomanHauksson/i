@@ -13,29 +13,29 @@ export interface Database {
         Row: {
           created_at: string
           id: number
-          num_shares: number | null
-          order_type: string | null
-          orderer_id: string | null
-          price: number | null
-          stock_id: string | null
+          num_shares: number
+          order_type: string
+          orderer_id: string
+          price: number
+          stock_id: string
         }
         Insert: {
           created_at?: string
           id?: number
-          num_shares?: number | null
-          order_type?: string | null
-          orderer_id?: string | null
-          price?: number | null
-          stock_id?: string | null
+          num_shares: number
+          order_type: string
+          orderer_id: string
+          price: number
+          stock_id: string
         }
         Update: {
           created_at?: string
           id?: number
-          num_shares?: number | null
-          order_type?: string | null
-          orderer_id?: string | null
-          price?: number | null
-          stock_id?: string | null
+          num_shares?: number
+          order_type?: string
+          orderer_id?: string
+          price?: number
+          stock_id?: string
         }
         Relationships: [
           {
@@ -56,29 +56,29 @@ export interface Database {
         Row: {
           created_at: string
           id: number
-          num_shares: number | null
-          order_type: string | null
-          orderer_id: string | null
-          price: number | null
-          stock_id: string | null
+          num_shares: number
+          order_type: string
+          orderer_id: string
+          price: number
+          stock_id: string
         }
         Insert: {
           created_at?: string
           id?: number
-          num_shares?: number | null
-          order_type?: string | null
-          orderer_id?: string | null
-          price?: number | null
-          stock_id?: string | null
+          num_shares: number
+          order_type: string
+          orderer_id: string
+          price: number
+          stock_id: string
         }
         Update: {
           created_at?: string
           id?: number
-          num_shares?: number | null
-          order_type?: string | null
-          orderer_id?: string | null
-          price?: number | null
-          stock_id?: string | null
+          num_shares?: number
+          order_type?: string
+          orderer_id?: string
+          price?: number
+          stock_id?: string
         }
         Relationships: [
           {
@@ -99,23 +99,23 @@ export interface Database {
         Row: {
           created_at: string
           id: number
-          num_shares: number | null
-          owner_id: string | null
-          stock_id: string | null
+          num_shares: number
+          owner_id: string
+          stock_id: string
         }
         Insert: {
           created_at?: string
           id?: number
-          num_shares?: number | null
-          owner_id?: string | null
-          stock_id?: string | null
+          num_shares: number
+          owner_id: string
+          stock_id: string
         }
         Update: {
           created_at?: string
           id?: number
-          num_shares?: number | null
-          owner_id?: string | null
-          stock_id?: string | null
+          num_shares?: number
+          owner_id?: string
+          stock_id?: string
         }
         Relationships: [
           {
@@ -135,35 +135,35 @@ export interface Database {
       profiles: {
         Row: {
           avatar_url: string | null
+          balance: number
           city: string | null
           description: string | null
           full_name: string | null
           id: string
           symbol: string | null
           updated_at: string | null
-          username: string | null
           website: string | null
         }
         Insert: {
           avatar_url?: string | null
+          balance: number
           city?: string | null
           description?: string | null
           full_name?: string | null
           id: string
           symbol?: string | null
           updated_at?: string | null
-          username?: string | null
           website?: string | null
         }
         Update: {
           avatar_url?: string | null
+          balance?: number
           city?: string | null
           description?: string | null
           full_name?: string | null
           id?: string
           symbol?: string | null
           updated_at?: string | null
-          username?: string | null
           website?: string | null
         }
         Relationships: [
@@ -177,25 +177,28 @@ export interface Database {
       }
       trades: {
         Row: {
-          buy_order_id: number | null
+          buy_order_id: number
           created_at: string
           id: number
-          num_shares: number | null
-          sell_order_id: number | null
+          num_shares: number
+          sell_order_id: number
+          share_price: number
         }
         Insert: {
-          buy_order_id?: number | null
+          buy_order_id: number
           created_at?: string
           id?: number
-          num_shares?: number | null
-          sell_order_id?: number | null
+          num_shares: number
+          sell_order_id: number
+          share_price: number
         }
         Update: {
-          buy_order_id?: number | null
+          buy_order_id?: number
           created_at?: string
           id?: number
-          num_shares?: number | null
-          sell_order_id?: number | null
+          num_shares?: number
+          sell_order_id?: number
+          share_price?: number
         }
         Relationships: [
           {
@@ -217,7 +220,19 @@ export interface Database {
       [_ in never]: never
     }
     Functions: {
-      [_ in never]: never
+      delete_avatar: {
+        Args: {
+          avatar_url: string
+        }
+        Returns: Record<string, unknown>
+      }
+      delete_storage_object: {
+        Args: {
+          bucket: string
+          object: string
+        }
+        Returns: Record<string, unknown>
+      }
     }
     Enums: {
       [_ in never]: never
