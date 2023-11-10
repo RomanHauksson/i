@@ -3,13 +3,12 @@ import { Grid, Col } from "@tremor/react";
 import TradeHistory from "@/components/tradeHistory";
 import Assets from "../../components/assets";
 import { SalesCard, ProfitCard, CustomersCard } from "@/components/metrics";
+import PageTitle from "@/components/page-title";
 
 export default function Portfolio() {
   return (
     <div className="flex flex-col gap-16">
-        <div className="flex h-[96px] items-end">
-            <h1 className="leading-none">portfolio</h1>
-        </div>
+        <PageTitle>portfolio</PageTitle>
         <Grid numItems={3} className="gap-2">
             <SalesCard />
             <ProfitCard />

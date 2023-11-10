@@ -22,15 +22,18 @@ export default async function RootLayout({
 }: {
   children: React.ReactNode
 }) {
-
   const supabase = createServerComponentClient({ cookies });
   const { data, error } = await supabase.auth.getSession();
 
+  // if (data.session == null) {
+  //   return <div>Error: not logged in.</div>;
+  // }
+
   return (
     <html lang="en">
-      <body className={spaceGrotesk.className}>
-          <div className="max-w-5xl gap-16 p-6 flex justify-center m-auto">
-            {data.session != null && <Sidebar />}
+      <body className={spaceGrotesk.className + " max-w-5xl gap-16 p-6 flex justify-center m-auto"}>
+          <Sidebar />
+          <div className="grow">
             {children}
           </div>
       </body>

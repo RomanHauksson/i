@@ -7,7 +7,7 @@ export default function Index() {
   return (
     <div className="row">
       <div className="col-6">
-        <h1 className="header">Sign in to <em>I'm</em></h1>
+        <h1 className="header">Sign in to <em>I&apos;m</em></h1>
         <p className="">
           The app for investments in people, not companies.
         </p>

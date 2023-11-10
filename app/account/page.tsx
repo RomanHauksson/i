@@ -6,8 +6,24 @@ import {
     AvatarFallback,
     AvatarImage,
 } from "@/components/ui/avatar"
+import Price from "@/components/price";
+import { createServerComponentClient } from '@supabase/auth-helpers-nextjs';
+import { cookies } from 'next/headers';
+import { Database } from "@/types/supabase";
 
 export default async function Account() {
+
+  const supabase = createServerComponentClient<Database>({ cookies });
+  const {
+    data: { session },
+  } = await supabase.auth.getSession();
+
+  if (session == null || session?.user == null) {
+    return(<div>Error: user session not found; you might be signed out.</div>);
+  }
+
+  const userId = session.user.id;
+
   return (
     <div className="inline-flex flex-col items-start gap-[39px] relative">
       <div className="inline-flex flex-col items-start gap-[39px] relative flex-[0_0_auto]">
@@ -35,29 +51,8 @@ export default async function Account() {
         </div>
       </div>
       <div className="inline-flex flex-col items-start gap-[15px] relative flex-[0_0_auto] w-full">
-        <div className="inline-flex items-end gap-[9px] relative flex-[0_0_auto]">
-          <div className="relative w-fit mt-[-1.00px] font-h-2 font-[number:var(--h-2-font-weight)] text-[#000000] text-[length:var(--h-2-font-size)] tracking-[var(--h-2-letter-spacing)] leading-[var(--h-2-line-height)] whitespace-nowrap [font-style:var(--h-2-font-style)]">
-            $54.01
-          </div>
-          <div className="relative w-fit font-h-3 font-[number:var(--h-3-font-weight)] text-[#0a7121] text-[length:var(--h-3-font-size)] tracking-[var(--h-3-letter-spacing)] leading-[var(--h-3-line-height)] whitespace-nowrap [font-style:var(--h-3-font-style)]">
-            +1.2%
-          </div>
-        </div>
-
+        <Price stockId={userId}/>
         <Chart />
-        
-        <div className="flex items-start gap-[25px] relative self-stretch w-full flex-[0_0_auto]">
-          <button className="bg-lime-700 flex items-center justify-center gap-[10px] px-[16px] py-[8px] relative flex-1 grow rounded-[6px] all-[unset] box-border">
-            <div className="relative w-fit mt-[-1.00px] font-body-medium font-[number:var(--body-medium-font-weight)] text-[#ffffff] text-[length:var(--body-medium-font-size)] tracking-[var(--body-medium-letter-spacing)] leading-[var(--body-medium-line-height)] whitespace-nowrap [font-style:var(--body-medium-font-style)]">
-              Buy
-            </div>
-          </button>
-          <button className="bg-red-700 flex items-center justify-center gap-[10px] px-[16px] py-[8px] relative flex-1 grow rounded-[6px] all-[unset] box-border">
-            <div className="relative w-fit mt-[-1.00px] font-body-medium font-[number:var(--body-medium-font-weight)] text-[#ffffff] text-[length:var(--body-medium-font-size)] tracking-[var(--body-medium-letter-spacing)] leading-[var(--body-medium-line-height)] whitespace-nowrap [font-style:var(--body-medium-font-style)]">
-              Sell
-            </div>
-          </button>
-        </div>
       </div>
     </div>
   );

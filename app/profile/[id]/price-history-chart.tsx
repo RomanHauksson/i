@@ -1,10 +1,11 @@
-"use client";
+"use server"
 
 import {
   Card,
   Title,
   Text,
   LineChart,
+  AreaChart,
   TabList,
   Tab,
   TabGroup,
@@ -12,8 +13,17 @@ import {
   TabPanels,
 } from "@tremor/react";
 
-import { useState } from "react";
+
+import { useState, useEffect } from "react";
 import { startOfYear, subDays } from "date-fns";
+import { getPriceHistory } from "@/app/actions";
+import { Session } from "@supabase/auth-helpers-nextjs";
+import { Database } from "@/types/supabase";
+
+type Price = {
+  created_at: Date;
+  share_price: number;
+}
 
 const data = [
 {
@@ -180,14 +190,25 @@ const data = [
 
 const periods = ["1M", "2M", "6M", "YTD", "Max"];
 
-const dataFormatter = (number: number) => `$ ${Intl.NumberFormat("us").format(number).toString()}`;
+// const dataFormatter = (number: number) => `$ ${Intl.NumberFormat("us").format(number).toString()}`;
 
-export default function PortfolioValue() {
-  const [selectedPeriod, setSelectedPeriod] = useState(0);
+const dataFormatter = (number: number) => {
+  "use server"
+  return `$ ${Intl.NumberFormat("us").format(number).toString()}`;
+}
+
+export default async function PriceHistoryChart({ stockId }: {stockId: string}) {
+  // const [selectedPeriod, setSelectedPeriod] = useState(0);
+  // const [priceHistory, setPriceHistory] = useState(null);
+  const selectedPeriod = 0;
+
+  // useEffect(() => {
+
+  // }, []);
+  const priceHistory: Price[] = await getPriceHistory(stockId);
 
   const getDate = (dateString: string) => {
-    const [day, month, year] = dateString.split(".").map(Number);
-    return new Date(year, month - 1, day);
+    return new Date(dateString);
   };
 
   const filterData = (startDate: Date, endDate: Date) =>
@@ -201,8 +222,17 @@ export default function PortfolioValue() {
     const periodName = periods[period];
     switch (periodName) {
       case "1M": {
-        const periodStartDate = subDays(lastAvailableDate, 30);
-        return filterData(periodStartDate, lastAvailableDate);
+        // const periodStartDate = subDays(lastAvailableDate, 30);
+        // return filterData(periodStartDate, lastAvailableDate);
+
+        // const reformattedData = priceHistory.map((item) => {
+        //   return {
+        //     created_at: item.created_at,
+        //     share_price: item.share_price,
+        //   };
+        // }
+        // );
+
       }
       case "2M": {
         const periodStartDate = subDays(lastAvailableDate, 60);
@@ -223,8 +253,8 @@ export default function PortfolioValue() {
 
   return (
     <Card>
-      <Title>portfolio value</Title>
-      <TabGroup index={selectedPeriod} onIndexChange={setSelectedPeriod} className="mt-10">
+      <Title>price history</Title>
+      <TabGroup index={selectedPeriod} className="mt-10">
         <TabList variant="line">
           <Tab>1M</Tab>
           <Tab>2M</Tab>
@@ -236,62 +266,62 @@ export default function PortfolioValue() {
           <TabPanel>
             <LineChart
               className="h-80 mt-8"
-              data={getFilteredData(selectedPeriod)}
-              index="Date"
-              categories={["Price"]}
+              data={priceHistory}
+              index="created_at"
+              categories={["share_price"]}
               colors={["blue"]}
-              valueFormatter={dataFormatter}
+              // valueFormatter={dataFormatter}
               showLegend={false}
               yAxisWidth={48}
             />
           </TabPanel>
           <TabPanel>
-            <LineChart
+            {/* <LineChart
               className="h-80 mt-8"
               data={getFilteredData(selectedPeriod)}
               index="Date"
               categories={["Price"]}
               colors={["blue"]}
-              valueFormatter={dataFormatter}
+              // valueFormatter={dataFormatter}
               showLegend={false}
               yAxisWidth={48}
-            />
+            /> */}
           </TabPanel>
           <TabPanel>
-            <LineChart
+            {/* <LineChart
               className="h-80 mt-8"
               data={getFilteredData(selectedPeriod)}
               index="Date"
               categories={["Price"]}
               colors={["blue"]}
-              valueFormatter={dataFormatter}
+              // valueFormatter={dataFormatter}
               showLegend={false}
               yAxisWidth={48}
-            />
+            /> */}
           </TabPanel>
           <TabPanel>
-            <LineChart
+            {/* <LineChart
               className="h-80 mt-8"
               data={getFilteredData(selectedPeriod)}
               index="Date"
               categories={["Price"]}
               colors={["blue"]}
-              valueFormatter={dataFormatter}
+              // valueFormatter={dataFormatter}
               showLegend={false}
               yAxisWidth={48}
-            />
+            /> */}
           </TabPanel>
           <TabPanel>
-            <LineChart
+            {/* <LineChart
               className="h-80 mt-8"
               data={getFilteredData(selectedPeriod)}
               index="Date"
               categories={["Price"]}
               colors={["blue"]}
-              valueFormatter={dataFormatter}
+              // valueFormatter={dataFormatter}
               showLegend={false}
               yAxisWidth={48}
-            />
+            /> */}
           </TabPanel>
         </TabPanels>
       </TabGroup>
