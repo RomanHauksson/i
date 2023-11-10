@@ -4,6 +4,7 @@ import React, { useState, useEffect } from "react";
 import ProfileCard from "@/components/profile-card";
 import { createClientComponentClient } from "@supabase/auth-helpers-nextjs";
 import { Database } from "@/types/supabase";
+import PageTitle from "@/components/page-title";
 
 export default function Explore() {
   const supabase = createClientComponentClient<Database>();
@@ -11,7 +12,7 @@ export default function Explore() {
   const [searchQuery, setSearchQuery] = useState("");
   const [profiles, setProfiles] = useState<Database['public']['Tables']['profiles']['Row'][]>([]);
   const [filteredUsers, setFilteredUsers] = useState<Database['public']['Tables']['profiles']['Row'][]>([]);
-
+  const [avatarUrls, setAvatarUrls] = useState<string[]>([]);
   useEffect(() => {
     async function fetchUsers() {
       let { data, error } = await supabase.from('profiles').select();
@@ -19,8 +20,12 @@ export default function Explore() {
         setProfiles(data);
       }
     }
+    async function fetchAvatarUrls() {
+
+    }
     fetchUsers();
-  }, []); // Empty dependency array means this effect runs once when the component mounts
+    fetchAvatarUrls();
+  }, [supabase]); // Empty dependency array means this effect runs once when the component mounts
 
   useEffect(() => {
     const results = profiles.filter(user =>
@@ -30,10 +35,8 @@ export default function Explore() {
   }, [searchQuery, profiles]);
 
   return (
-    <div className="flex-col gap-16 flex-1 grow flex items-start relative">
-      <div className="flex h-24 items-end">
-        <h1 className="leading-none">explore</h1>
-      </div>
+    <div className="flex flex-col gap-16 flex-1 grow items-start">
+      <PageTitle>explore</PageTitle>
       <div className="flex flex-col items-start gap-[48px] relative self-stretch w-full flex-[0_0_auto]">
         <input
           value={searchQuery}

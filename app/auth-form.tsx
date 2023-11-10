@@ -5,8 +5,9 @@ import { createClientComponentClient } from '@supabase/auth-helpers-nextjs'
 import { Database } from '@/types/supabase'
 
 export default function AuthForm() {
-  const supabase = createClientComponentClient<Database>()
-  const redirectTo = ((typeof window !== "undefined") && window.location.origin) + '/auth/callback';
+  const supabase = createClientComponentClient<Database>();
+  // const redirectTo = ((typeof window !== "undefined") && window.location.origin) + '/auth/callback';
+  const redirectTo = 'http://localhost:3000/auth/callback';
   return (
     <Auth
       supabaseClient={supabase}

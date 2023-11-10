@@ -2,6 +2,7 @@ import { SewingPinIcon } from '@radix-ui/react-icons'
 import Image from "next/image";
 import Link from 'next/link';
 import { Database } from '@/types/supabase';
+import UserAvatar from './user-avatar';
 
 interface ProfileCardProps {
     profile: Database['public']['Tables']['profiles']['Row'];
@@ -12,7 +13,8 @@ export default function ProfileCard({ profile }: ProfileCardProps) {
         <Link href={"/profile/" + profile.id}
         className={`flex items-start gap-[16px] p-[18px] w-full bg-[#ffffff] rounded-[8px] border border-solid`}
       >
-        <Image className="rounded-full" alt="Avatar" src="/Roman.jpg" width={64} height={64}/>
+        {/* <Image className="rounded-full" alt="Avatar" src={"/Roman.jpg"} width={64} height={64}/> */}
+        {/* <UserAvatar userId={profile.id} size={64}/> */}
         <div className="inline-flex flex-col items-start gap-[8px] flex-[0_0_auto]">
           <div className="text-xl leading-none">
             {profile.full_name}

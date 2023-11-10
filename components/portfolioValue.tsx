@@ -240,7 +240,7 @@ export default function PortfolioValue() {
               index="Date"
               categories={["Price"]}
               colors={["blue"]}
-              valueFormatter={dataFormatter}
+              // valueFormatter={dataFormatter}
               showLegend={false}
               yAxisWidth={48}
             />
@@ -252,7 +252,7 @@ export default function PortfolioValue() {
               index="Date"
               categories={["Price"]}
               colors={["blue"]}
-              valueFormatter={dataFormatter}
+              // valueFormatter={dataFormatter}
               showLegend={false}
               yAxisWidth={48}
             />
@@ -264,7 +264,7 @@ export default function PortfolioValue() {
               index="Date"
               categories={["Price"]}
               colors={["blue"]}
-              valueFormatter={dataFormatter}
+              // valueFormatter={dataFormatter}
               showLegend={false}
               yAxisWidth={48}
             />
@@ -276,7 +276,7 @@ export default function PortfolioValue() {
               index="Date"
               categories={["Price"]}
               colors={["blue"]}
-              valueFormatter={dataFormatter}
+              // valueFormatter={dataFormatter}
               showLegend={false}
               yAxisWidth={48}
             />
@@ -288,7 +288,7 @@ export default function PortfolioValue() {
               index="Date"
               categories={["Price"]}
               colors={["blue"]}
-              valueFormatter={dataFormatter}
+              // valueFormatter={dataFormatter}
               showLegend={false}
               yAxisWidth={48}
             />
