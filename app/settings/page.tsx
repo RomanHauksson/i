@@ -11,6 +11,10 @@ export default async function Account() {
     data: { session },
   } = await supabase.auth.getSession();
 
+  if (session == null || session?.user == null) {
+    return(<div>Error: user session not found; you might be signed out.</div>);
+  }
+
   return(
     <div className="flex flex-col gap-16 flex-1 grow items-start">
       <PageTitle>settings</PageTitle>

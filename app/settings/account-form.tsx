@@ -6,20 +6,17 @@ import Avatar from './avatar'
 import { Button } from '@/components/ui/button'
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
-import { set } from 'react-hook-form'
 
 // TODO: fix sign out button
 
-export default function AccountForm({ session }: { session: Session | null}) {
-  
-  if (session == null) return <div>Error: authentication session not found.</div>
-  
+export default function AccountForm({ session }: { session: Session }) {
   const supabase = createClientComponentClient<Database>()
   const [loading, setLoading] = useState(true)
   const [fullname, setFullname] = useState<string | null>(null)
   const [website, setWebsite] = useState<string | null>(null)
   const [avatar_url, setAvatarUrl] = useState<string | null>(null)
   const [balance, setBalance] = useState<number>(0)
+
   const user = session.user;
 
   const getProfile = useCallback(async () => {
@@ -121,9 +118,9 @@ export default function AccountForm({ session }: { session: Session | null}) {
         <Label htmlFor="balance">balance</Label>
         <Input
           id="balance"
-          type="value"
+          type="number"
           value={balance || ''}
-          onChange={(e) => setBalance(e.target.value)}
+          onChange={(e) => setBalance(Number(e.target.value))}
         />
       </div>
 

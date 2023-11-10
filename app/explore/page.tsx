@@ -25,7 +25,7 @@ export default function Explore() {
     }
     fetchUsers();
     fetchAvatarUrls();
-  }, []); // Empty dependency array means this effect runs once when the component mounts
+  }, [supabase]); // Empty dependency array means this effect runs once when the component mounts
 
   useEffect(() => {
     const results = profiles.filter(user =>
